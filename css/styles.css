@@ -1,0 +1,486 @@
+/* Solar System Simulator Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    user-select: none;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    text-align: center;
+}
+
+.sun-loader {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffdd00 0%, #ff8800 50%, #ff4400 100%);
+    box-shadow: 0 0 60px #ff8800, 0 0 100px #ff6600;
+    animation: pulse 1.5s ease-in-out infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 60px #ff8800, 0 0 100px #ff6600; }
+    50% { transform: scale(1.1); box-shadow: 0 0 80px #ff8800, 0 0 120px #ff6600; }
+}
+
+.loader p {
+    font-size: 18px;
+    color: #aaa;
+    animation: fade 1.5s ease-in-out infinite;
+}
+
+@keyframes fade {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Panels */
+.panel {
+    position: fixed;
+    background: rgba(10, 15, 30, 0.9);
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.panel-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h2 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #88ccff;
+}
+
+.panel-content {
+    padding: 15px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* Left Panel - Info */
+.left-panel {
+    left: 20px;
+    top: 20px;
+    width: 300px;
+}
+
+.object-type {
+    font-size: 12px;
+    padding: 3px 10px;
+    background: rgba(100, 150, 255, 0.2);
+    border-radius: 10px;
+    color: #88ccff;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-row .label {
+    color: #888;
+}
+
+.hint {
+    color: #666;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+#facts-container {
+    margin-top: 15px;
+}
+
+#facts-container h3 {
+    font-size: 14px;
+    color: #88ccff;
+    margin-bottom: 10px;
+}
+
+#facts-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+#facts-list li {
+    padding: 8px 0;
+    padding-left: 15px;
+    position: relative;
+    font-size: 13px;
+    color: #ccc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#facts-list li::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: #ffcc00;
+}
+
+/* Right Panel - Settings */
+.right-panel {
+    right: 20px;
+    top: 20px;
+    width: 250px;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #88ccff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4488ff;
+}
+
+.setting-group label {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.setting-group select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background: rgba(30, 40, 60, 0.8);
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.setting-group select:focus {
+    outline: none;
+    border-color: #4488ff;
+}
+
+/* Bottom Panel - Controls */
+.bottom-panel {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+}
+
+.time-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(30, 40, 60, 0.8);
+    color: #88ccff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: rgba(60, 80, 120, 0.8);
+    border-color: #4488ff;
+}
+
+.control-btn.active {
+    background: rgba(68, 136, 255, 0.3);
+    border-color: #4488ff;
+}
+
+.time-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px;
+}
+
+#simulation-date {
+    font-size: 14px;
+    color: #fff;
+}
+
+.speed {
+    font-size: 12px;
+    color: #88ccff;
+}
+
+.navigation-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.planet-selector {
+    padding: 8px 12px;
+    background: rgba(30, 40, 60, 0.8);
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.planet-selector:focus {
+    outline: none;
+    border-color: #4488ff;
+}
+
+/* Labels Container */
+#labels-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.object-label {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 5px #000, 0 0 10px #000;
+    white-space: nowrap;
+    transform: translate(-50%, -100%);
+    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.object-label:hover {
+    background: rgba(68, 136, 255, 0.5);
+    transform: translate(-50%, -100%) scale(1.1);
+}
+
+.object-label.planet {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.object-label.sun {
+    color: #ffdd00;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Tooltip */
+.tooltip {
+    position: fixed;
+    background: rgba(20, 30, 50, 0.95);
+    border: 1px solid rgba(100, 150, 255, 0.4);
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 13px;
+    color: #fff;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    max-width: 250px;
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+.tooltip-name {
+    font-weight: bold;
+    color: #88ccff;
+    margin-bottom: 5px;
+}
+
+.tooltip-type {
+    font-size: 11px;
+    color: #888;
+}
+
+/* Scrollbar */
+.panel-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+    background: rgba(100, 150, 255, 0.3);
+    border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 150, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .left-panel {
+        width: 260px;
+    }
+    .right-panel {
+        width: 220px;
+    }
+}
+
+@media (max-width: 900px) {
+    .left-panel, .right-panel {
+        display: none;
+    }
+
+    .bottom-panel {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90%;
+        padding: 10px;
+    }
+}
+
+/* Canvas cursor */
+#container canvas {
+    cursor: grab;
+}
+
+#container canvas:active {
+    cursor: grabbing;
+}
+
+/* Highlighted state for selected object */
+.object-label.selected {
+    background: rgba(68, 136, 255, 0.8);
+    box-shadow: 0 0 10px rgba(68, 136, 255, 0.5);
+}
+
+/* Help overlay */
+.help-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.help-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.help-content {
+    background: rgba(20, 30, 50, 0.95);
+    border: 1px solid rgba(100, 150, 255, 0.4);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+}
+
+.help-content h2 {
+    color: #88ccff;
+    margin-bottom: 20px;
+}
+
+.help-content ul {
+    list-style: none;
+}
+
+.help-content li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.help-content kbd {
+    background: rgba(100, 150, 255, 0.2);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    margin-right: 10px;
+}

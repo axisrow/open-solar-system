@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Симулятор Солнечной Системы</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="sun-loader"></div>
+            <p>Загрузка Солнечной системы...</p>
+        </div>
+    </div>
+
+    <div id="container"></div>
+
+    <!-- Info Panel (Left) -->
+    <div id="info-panel" class="panel left-panel">
+        <div class="panel-header">
+            <h2 id="object-name">Солнечная система</h2>
+            <span id="object-type" class="object-type">Добро пожаловать!</span>
+        </div>
+        <div class="panel-content">
+            <div id="object-info">
+                <p>Кликните на любой объект для получения информации</p>
+                <p class="hint">Используйте колёсико мыши для масштабирования</p>
+                <p class="hint">Зажмите левую кнопку мыши для вращения</p>
+            </div>
+            <div id="object-details" style="display: none;">
+                <div class="info-row"><span class="label">Диаметр:</span><span id="detail-diameter">-</span></div>
+                <div class="info-row"><span class="label">Масса:</span><span id="detail-mass">-</span></div>
+                <div class="info-row"><span class="label">День:</span><span id="detail-day">-</span></div>
+                <div class="info-row"><span class="label">Год:</span><span id="detail-year">-</span></div>
+                <div class="info-row"><span class="label">Спутники:</span><span id="detail-moons">-</span></div>
+                <div id="facts-container">
+                    <h3>Интересные факты</h3>
+                    <ul id="facts-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Panel (Right) -->
+    <div id="settings-panel" class="panel right-panel">
+        <div class="panel-header">
+            <h2>Настройки</h2>
+            <button id="toggle-settings" class="toggle-btn">−</button>
+        </div>
+        <div class="panel-content settings-content">
+            <div class="setting-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="show-orbits" checked>
+                    <span>Показать орбиты</span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="show-labels" checked>
+                    <span>Показать названия</span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="show-asteroids" checked>
+                    <span>Показать астероиды</span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="show-comets" checked>
+                    <span>Показать кометы</span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="realistic-sizes">
+                    <span>Реалистичные размеры</span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <label>Качество:</label>
+                <select id="quality-select">
+                    <option value="low">Низкое</option>
+                    <option value="medium" selected>Среднее</option>
+                    <option value="high">Высокое</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Control Panel -->
+    <div id="control-panel" class="panel bottom-panel">
+        <div class="time-controls">
+            <button id="btn-reverse" class="control-btn" title="Назад">⏪</button>
+            <button id="btn-slower" class="control-btn" title="Медленнее">◀</button>
+            <button id="btn-pause" class="control-btn active" title="Пауза/Воспроизведение">⏸</button>
+            <button id="btn-faster" class="control-btn" title="Быстрее">▶</button>
+            <button id="btn-realtime" class="control-btn" title="Реальное время">1x</button>
+        </div>
+        <div class="time-display">
+            <span id="simulation-date">1 января 2024</span>
+            <span id="speed-display" class="speed">Скорость: 1x</span>
+        </div>
+        <div class="navigation-controls">
+            <select id="planet-select" class="planet-selector">
+                <option value="">Перейти к...</option>
+                <option value="sun">☀️ Солнце</option>
+                <option value="mercury">☿ Меркурий</option>
+                <option value="venus">♀ Венера</option>
+                <option value="earth">🌍 Земля</option>
+                <option value="mars">♂ Марс</option>
+                <option value="jupiter">♃ Юпитер</option>
+                <option value="saturn">♄ Сатурн</option>
+                <option value="uranus">⛢ Уран</option>
+                <option value="neptune">♆ Нептун</option>
+                <option value="pluto">⯓ Плутон</option>
+                <option value="hubble">🔭 Хаббл</option>
+            </select>
+            <button id="btn-follow" class="control-btn" title="Следовать за объектом">🎯</button>
+            <button id="btn-reset-camera" class="control-btn" title="Сбросить камеру">🏠</button>
+        </div>
+    </div>
+
+    <!-- Object Labels Container -->
+    <div id="labels-container"></div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
